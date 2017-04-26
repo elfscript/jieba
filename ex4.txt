@@ -1,0 +1,24 @@
+#encoding=utf-8
+import jieba
+
+jieba.set_dictionary('./extra_dict/dict.txt.big')
+
+content = open('lyric.txt', 'rb').read()
+
+print "Input：", content
+
+words = jieba.tokenize(unicode(content, 'utf-8'))
+
+print "Output 精確模式 Full Mode："
+for tk in words:
+    print "word %s\t\t start: %d \t\t end:%d" % (tk[0],tk[1],tk[2])
+
+
+#=======
+import jieba.analyse
+tags = jieba.analyse.extract_tags(content, 10)
+
+print "Output："
+print ",".join(tags)
+# 程式中的 jieba.analyse.extract_tags(content, 10)，就是告訴 jieba 我們
+# 要從這個文章中取出前 10 個 tf-idf 值最大的關鍵詞。

@@ -1,0 +1,9 @@
+# to build 3hdeng/jieba:2.7
+FROM python:2.7
+MAINTAINER 3hdeng
+#RUN  pip install -U nltk &&  echo "nltk installed"
+#RUN  python -m nltk.downloader book && echo "nltk data for book downloaded"
+#RUN  apt-get update &&  apt-get install -y  python-matplotlib && echo "matplotlib installed"
+RUN pip install jieba
+
+CMD []

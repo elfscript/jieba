@@ -5,6 +5,8 @@ import jieba
 import jieba.analyse
 from optparse import OptionParser
 
+jieba.set_dictionary('../extra_dict/dict.txt.big')
+
 USAGE = "usage:    python extract_tags_stop_words.py [file name] -k [top k]"
 
 parser = OptionParser(USAGE)

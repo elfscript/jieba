@@ -1,0 +1,78 @@
+# -*- coding: utf-8 -*-
+#encoding utf-8
+from __future__ import absolute_import, unicode_literals
+__version__ = '0.38'
+__license__ = 'MIT'
+
+
+#================
+import re
+text = "Some.File.Num10.example.txt"
+arr=re.split(r'Num\d{2}',text)
+print(arr)
+
+rex=re.compile("(Num\d{2})", re.U)
+arr=rex.split(text)
+print(arr)
+exit()
+
+
+#================
+#import re
+import os
+import sys
+import time
+import logging
+import marshal
+import tempfile
+import threading
+from math import log
+from hashlib import md5
+#from ._compat import *
+#from . import finalseg
+
+_get_abs_path = lambda path: os.path.normpath(os.path.join(os.getcwd(), path))
+
+DEFAULT_DICT = None
+DEFAULT_DICT_NAME = "dict.txt"
+
+log_console = logging.StreamHandler(sys.stderr)
+default_logger = logging.getLogger(__name__)
+default_logger.setLevel(logging.DEBUG)
+default_logger.addHandler(log_console)
+
+DICT_WRITING = {}
+
+pool = None
+
+re_userdict = re.compile('^(.+?)( [0-9]+)?( [a-z]+)?$', re.U)
+
+re_eng = re.compile('[a-zA-Z0-9]', re.U)
+
+# \u4E00-\u9FD5a-zA-Z0-9+#&\._ : All non-space characters. Will be handled with re_han
+# \r\n|\s : whitespace characters. Will not be handled.
+re_han_default = re.compile("([\u4E00-\u9FD5a-zA-Z0-9+#&\._]+)", re.U)
+re_skip_default = re.compile("(\r\n|\s)", re.U)
+re_han_cut_all = re.compile("([\u4E00-\u9FD5]+)", re.U)
+re_skip_cut_all = re.compile("[^a-zA-Z0-9+#\n]", re.U)
+
+
+re_han=re_han_default
+
+def cut(sentence):
+  #sentence = strdecode(sentence)
+  blocks = re_han.split(sentence)
+  for blk in blocks:
+            print("blk:", blk)
+            if not blk:
+                continue
+            if re_han.match(blk):
+                #for word in cut_block(blk):
+                yield blk+ u'***'
+	    else:
+		yield blk+ u'---'	
+
+sen=u"我是123,45一隻,67豬89"
+for x in cut(sen):
+  print x
+

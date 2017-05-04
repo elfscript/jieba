@@ -14,7 +14,7 @@ print(arr)
 rex=re.compile("(Num\d{2})", re.U)
 arr=rex.split(text)
 print(arr)
-exit()
+#exit()
 
 
 #================
